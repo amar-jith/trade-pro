@@ -16,7 +16,6 @@ import {
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { useRouter } from "next/navigation";
-// import Link from "next/link";
 import Image from "next/image";
 
 const Animatedsection = ({ children }: any) => {
