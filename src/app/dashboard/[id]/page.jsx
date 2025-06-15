@@ -18,8 +18,12 @@ import {
   BarChart2,
   Zap,
 } from "lucide-react";
+
 import { Chart } from "react-google-charts";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { use } from "react";
+
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -46,22 +50,22 @@ const Header = () => {
         <nav className="hidden md:block">
           <ul className="flex space-x-4">
             <li>
-              <a
+              <Link
                 href="/dashboard"
                 className="text-blue-500 font-semibold flex items-center"
               >
                 <Zap className="mr-1" size={16} />
                 Explore
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="/dashboard"
                 className="text-gray-300 hover:text-blue-500 transition-colors flex items-center"
               >
                 <BarChart2 className="mr-1" size={16} />
                 Investments
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>
@@ -113,22 +117,22 @@ const Header = () => {
             <nav className="mt-8">
               <ul className="space-y-4">
                 <li>
-                  <a
+                  <Link
                     href="#"
                     className="text-blue-500 font-semibold flex items-center"
                   >
                     <Zap className="mr-2" size={16} />
                     Explore
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href="#"
                     className="text-gray-300 hover:text-blue-500 transition-colors flex items-center"
                   >
                     <BarChart2 className="mr-2" size={16} />
                     Investments
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </nav>
@@ -144,23 +148,26 @@ const Breadcrumb = ({ stock }) => (
     {...fadeInUp}
     className="flex items-center space-x-2 text-sm text-gray-400 my-4"
   >
-    <a href="/" className="hover:text-blue-500">
+    <Link href="/" className="hover:text-blue-500">
       Home
-    </a>
+    </Link>
     <span>/</span>
-    <a href="/dashboard" className="hover:text-blue-500">
+    <Link href="/dashboard" className="hover:text-blue-500">
       Stocks
-    </a>
+    </Link>
     <span>/</span>
     <span className="text-blue-500">{stock}</span>
   </motion.div>
 );
 
 const generateRandomData = (currentValue, points) => {
-  const data = [["Time", "Low", "Open", "Close", "High"]];
+  const data = [
+    ["Time", "Low", "Open", "Close", "High"],
+    [new Date(), 423000, 424000, 425000, 426000],
+  ];
 
   for (let i = 0; i < points; i++) {
-    const time = new Date(Date.now() - i * 5000).toLocaleTimeString();
+    const time = new Date(Date.now() - i * 5000);
     const open = currentValue + Math.random() * 10 - 5;
     const close = open + Math.random() * 10 - 5;
     const low = Math.min(open, close) - Math.random() * 5;
@@ -186,7 +193,7 @@ const StockChart = ({ stock }) => {
       setData((prevData) => [...prevData, ...newData.slice(1)]);
       setCurrentValue(newData[newData.length - 1][3]);
       console.log(newData);
-      const initialValue = data[1][2];
+      const initialValue = data?.[1]?.[2] || currentValue;
       const changeValue = currentValue - initialValue;
       const changePercentage = (changeValue / initialValue) * 100;
       setChange({ value: changeValue, percentage: changePercentage });
@@ -503,6 +510,7 @@ const OpenInterest = () => {
 };
 
 export default function GrowwNIFTY50Page({ params }) {
+  const { id } = use(params);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -534,9 +542,9 @@ export default function GrowwNIFTY50Page({ params }) {
     <div className="bg-gray-900 min-h-screen text-gray-300">
       <Header />
       <main className="container mx-auto px-4">
-        <Breadcrumb stock={params.id} />
-        <StockChart stock={params.id} />
-        <OptionsTable stock={params.id} />
+        <Breadcrumb stock={id} />
+        <StockChart stock={id} />
+        <OptionsTable stock={id} />
         <OpenInterest />
       </main>
     </div>

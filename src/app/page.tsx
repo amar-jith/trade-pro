@@ -13,11 +13,11 @@ import {
   Zap,
 } from "lucide-react";
 
-import Image from "next/image";
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import Router from "next/navigation";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
 
 const Animatedsection = ({ children }: any) => {
   const ref = useRef(null);
@@ -271,10 +271,12 @@ export default function Home() {
                 transition={{ duration: 0.8 }}
                 className="bg-gray-800 mr-10 p-8 rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-300 relative overflow-hidden group"
               >
-                <img
-                  className="w-full rounded-xl"
+                <Image
                   src="https://i.ibb.co/C1jWyk9/1.jpg"
                   alt="Trading platform screenshot"
+                  width={800}
+                  height={600}
+                  className="w-full rounded-xl"
                 />
                 <motion.div
                   whileHover={{ opacity: 0.2 }}
@@ -294,9 +296,11 @@ export default function Home() {
                 transition={{ duration: 0.8 }}
                 className="bg-gray-800 ml-10 p-8 rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-300 relative overflow-hidden group"
               >
-                <img
+                <Image
                   src="https://i.ibb.co/0K3ZTzt/2.jpg"
                   alt="Market analysis feature"
+                  width={800}
+                  height={600}
                   className="w-full rounded-xl"
                 />
                 <motion.div

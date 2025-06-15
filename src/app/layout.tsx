@@ -9,6 +9,7 @@ import {
   Twitter,
   Youtube,
 } from "lucide-react";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,9 +35,9 @@ const Footer = () => (
           <p className="text-sm mb-2">Abch Road,Banglore</p>
           <p className="text-sm mb-2">Banglore-560103</p>
           <p className="text-sm mb-2">
-            <a href="" className="text-blue-500 hover:underline">
+            <Link href="" className="text-blue-500 hover:underline">
               Contact Us
-            </a>
+            </Link>
           </p>
           <div className="flex space-x-4">
             <Facebook
